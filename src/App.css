@@ -1,78 +1,78 @@
 .timeline-container {
-  position: relative;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
+  position: relative;        /* 相对定位，为内部绝对定位元素提供参照 */
+  margin: 20px;              /* 外边距，容器与外部元素保持距离 */
+  padding: 20px;             /* 内边距，让内部内容不要紧贴边框 */
+  border: 1px solid #ddd;    /* 浅灰色边框，给容器一个可视化的边界 */
 }
 
 .year-line {
-  position: relative;
-  height: 30px;
-  border-bottom: 2px solid #555;
-  margin-bottom: 20px;
+  position: relative;        /* 相对定位，内部刻度线(year-tick)会使用它作为定位基准 */
+  height: 30px;              /* 年份刻度区域高度 */
+  border-bottom: 2px solid #555; /* 底部画一条深灰色的横线作为时间轴 */
+  margin-bottom: 20px;       /* 底部留出空间与人物时间条分隔 */
 }
 
 .year-tick {
-  position: absolute;
-  bottom: -20px;
-  font-size: 12px;
-  transform: translateX(-50%);
-  color: #333;
+  position: absolute;        /* 绝对定位，根据 left 设置位置显示年份标签 */
+  bottom: -20px;              /* 向下偏移 20px 让文字在时间轴横线下方 */
+  font-size: 12px;           /* 较小的文字以免占太多空间 */
+  transform: translateX(-50%); /* 让年份标签水平居中对齐到刻度点 */
+  color: #333;               /* 深灰色文字颜色 */
 }
 
 .people-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: flex;             /* 使用 flex 布局垂直排列人物 */
+  flex-direction: column;    /* 主轴方向设置为列方向 */
+  gap: 20px;                  /* 每个“人物行”之间留 20px 的空白间隔 */
 }
 
 .person-line {
-  position: relative;
+  position: relative;        /* 相对定位，为内部事件和条形块绝对定位提供参照 */
 }
 
 .person-name {
-  font-weight: bold;
-  margin-bottom: 5px;
+  font-weight: bold;         /* 人名加粗 */
+  margin-bottom: 5px;        /* 人名下方留 5px 间距 */
 }
 
 .events-bar {
-  position: relative;
-  height: 10px;
-  background: #eee;
-  border-radius: 5px;
+  position: relative;        /* 相对定位，为内部事件点和状态条定位提供基准 */
+  height: 10px;              /* 事件条高度 */
+  background: #eee;          /* 浅灰色背景，表示时间轴底色 */
+  border-radius: 5px;        /* 圆角，让条看起来更柔和 */
 }
 
 .event-point {
-  position: absolute;
-  top: -5px;
-  width: 5px;
-  height: 20px;
-  background: #4CAF50;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background 0.2s;
+  position: absolute;        /* 绝对定位，根据时间的位置设置 left 进行放置 */
+  top: -5px;                  /* 事件小方块向上偏移，让它突出到时间条上方 */
+  width: 5px;                 /* 事件点的宽度 */
+  height: 20px;               /* 事件点的高度（比整个条高一点以便突出） */
+  background: #4CAF50;       /* 默认绿色小方块 */
+  border-radius: 3px;        /* 轻微圆角，让方块边角更柔和 */
+  cursor: pointer;           /* 鼠标移上去显示小手图标 */
+  transition: background 0.2s; /* 鼠标悬浮时的背景色过渡动画 */
 }
 
 .event-point:hover {
-  background: #ff9800;
+  background: #ff9800;       /* 悬停时事件点变为橙色 */
 }
 
 .tooltip {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-size: 14px;
+  position: fixed;           /* 固定定位，相对于视口定位，不随滚动条移动 */
+  bottom: 20px;              /* 距离底部 20px */
+  right: 20px;               /* 距离右侧 20px */
+  background: rgba(0,0,0,0.7); /* 半透明黑色背景 */
+  color: #fff;               /* 白色文字 */
+  padding: 10px 15px;        /* 内边距，内容与背景边界保持间隔 */
+  border-radius: 5px;        /* 圆角 */
+  font-size: 14px;           /* 中小字号 */
 }
 
 .period-block {
-  position: absolute;
-  top: 0;
-  height: 10px;
-  background: rgba(100, 149, 237, 0.4); /* 淡蓝色条 */
-  border-radius: 5px;
-  cursor: pointer;
+  position: absolute;        /* 绝对定位，根据对应时间段计算 left 和宽度 */
+  top: 0;                    /* 紧贴所在条的顶部 */
+  height: 10px;              /* 高度与事件条一致 */
+  background: rgba(100, 149, 237, 0.4); /* 淡蓝色透明背景，表示时期状态 */
+  border-radius: 5px;        /* 圆角，让状态条末端更圆润 */
+  cursor: pointer;           /* 鼠标变成可点击的手型 */
 }

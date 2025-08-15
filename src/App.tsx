@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import data from "./data.json";
 import "./App.css";
 
+// MUI 组件
+import { Container, Typography, TextField, Stack, Paper } from "@mui/material";
+
 const startDate = "611-01-01";
 const endDate = "627-12-31";
 
@@ -32,7 +35,6 @@ interface HoverInfo {
   end?: string;
 }
 
-// 工具方法
 const toTime = (dateStr: string) => new Date(dateStr).getTime();
 
 const getPosition = (dateStr: string, rangeStart: number, rangeEnd: number) => {
@@ -63,7 +65,6 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
   const rangeStart = toTime(start);
   const rangeEnd = toTime(end);
 
-  // 生成年份刻度
   const startYear = new Date(start).getFullYear();
   const endYear = new Date(end).getFullYear();
   const yearsArr: string[] = [];
@@ -73,7 +74,6 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
 
   return (
     <div className="timeline-container">
-      {/* 年份刻度 */}
       <div className="year-line">
         {yearsArr.map((yStr) => (
           <div
@@ -100,7 +100,7 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
                 )
                 .map((p, idx) => {
                   const blockStartStr =
-                    toTime(p.start) < rangeStart ? start : p.start; // 如果状态开始早于范围，则用范围起点
+                    toTime(p.start) < rangeStart ? start : p.start;
                   return (
                     <div
                       key={`period-${idx}`}
@@ -160,7 +160,6 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
         ))}
       </div>
 
-      {/* 悬浮信息 */}
       {hoverInfo && (
         <div className="tooltip">
           <strong>{hoverInfo.name}</strong>
@@ -189,31 +188,37 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="App">
-      <h1>历史人物时间线（精确到月日）</h1>
+    <Container sx={{ paddingTop: 4 }}>
+      <Typography variant="h4" align="center" gutterBottom>
+        历史人物时间线
+      </Typography>
 
-      {/* 时间范围输入 */}
-      <div style={{ marginBottom: "20px" }}>
-        <label>
-          开始日期：
-          <input
+      {/* 输入框部分 */}
+      <Paper sx={{ padding: 2, marginBottom: 3, marginX: 3 }} elevation={2}>
+        <Stack direction="row" spacing={3}>
+          <TextField
+            label="开始日期"
             type="date"
             value={start}
             onChange={(e) => setStart(e.target.value)}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
-        </label>
-        <label style={{ marginLeft: "20px" }}>
-          结束日期：
-          <input
+          <TextField
+            label="结束日期"
             type="date"
             value={end}
             onChange={(e) => setEnd(e.target.value)}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
-        </label>
-      </div>
+        </Stack>
+      </Paper>
 
       <Timeline people={people} start={start} end={end} />
-    </div>
+    </Container>
   );
 };
 

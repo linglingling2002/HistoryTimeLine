@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
+.timeline-container {
+  position: relative;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.year-line {
+  position: relative;
+  height: 30px;
+  border-bottom: 2px solid #555;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.year-tick {
+  position: absolute;
+  bottom: -20px;
+  font-size: 12px;
+  transform: translateX(-50%);
+  color: #333;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.people-lines {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.person-line {
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.person-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.events-bar {
+  position: relative;
+  height: 10px;
+  background: #eee;
+  border-radius: 5px;
+}
+
+.event-point {
+  position: absolute;
+  top: -5px;
+  width: 5px;
+  height: 20px;
+  background: #4CAF50;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.event-point:hover {
+  background: #ff9800;
+}
+
+.tooltip {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.period-block {
+  position: absolute;
+  top: 0;
+  height: 10px;
+  background: rgba(100, 149, 237, 0.4); /* 淡蓝色条 */
+  border-radius: 5px;
+  cursor: pointer;
 }

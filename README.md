@@ -10,4 +10,4 @@
 
 
 ## 示例图
-![示例图](image.png)
+![alt text](image.png)

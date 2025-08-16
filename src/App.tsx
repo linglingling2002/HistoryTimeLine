@@ -139,7 +139,6 @@ const fileEntries = context.keys().map((key: string) => {
   return { name, data: data.default ?? data };
 });
 
-
 interface EventItem {
   date: string;
   status: string;

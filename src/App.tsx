@@ -16,7 +16,7 @@ import {
 const defaultRanges: Record<string, { start: string; end: string }> = {
   "han.json": { start: "-256-01-01", end: "-195-12-31" },
   "tang.json": { start: "566-01-01", end: "649-07-10" },
-  "song.json": { start: "860-01-01", end: "1000-03-19" },
+  "song.json": { start: "875-01-01", end: "895-03-19" },
 };
 
 // ========== 支持公元前年份的日期解析函数 ==========
@@ -333,10 +333,10 @@ const App: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState(fileEntries[0].name);
   const [people, setPeople] = useState<Person[]>(fileEntries[0].data);
   const [start, setStart] = useState(
-    defaultRanges[fileEntries[0].name]?.start || "-200-01-01"
+    defaultRanges[fileEntries[0].name]?.start || "850-01-01"
   );
   const [end, setEnd] = useState(
-    defaultRanges[fileEntries[0].name]?.end || "200-12-31"
+    defaultRanges[fileEntries[0].name]?.end || "1000-12-31"
   );
 
   const handleFileChange = (event: any) => {

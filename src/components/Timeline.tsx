@@ -191,8 +191,17 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
                       key={`period-${idx}`}
                       className="period-block"
                       style={{
-                        left: `${getPosition(blockStartStr, rangeStart, rangeEnd)}%`,
-                        width: `${getWidth(p.start, p.end, rangeStart, rangeEnd)}%`,
+                        left: `${getPosition(
+                          blockStartStr,
+                          rangeStart,
+                          rangeEnd
+                        )}%`,
+                        width: `${getWidth(
+                          p.start,
+                          p.end,
+                          rangeStart,
+                          rangeEnd
+                        )}%`,
                       }}
                       onMouseEnter={() =>
                         setHoverInfo({

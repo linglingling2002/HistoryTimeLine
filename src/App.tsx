@@ -17,7 +17,7 @@ import Timeline from "./components/Timeline";
 const defaultRanges: Record<string, { start: string; end: string }> = {
   "z_han.json": { start: "-256-01-01", end: "-195-12-31" },
   "tang.json": { start: "566-01-01", end: "649-07-10" },
-  "song.json": { start: "820-01-01", end: "915-03-19" },
+  "song.json": { start: "900-01-01", end: "945-03-19" },
 };
 
 // ========== Webpack 动态导入 JSON 数据 ==========

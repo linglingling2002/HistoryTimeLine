@@ -125,6 +125,7 @@ function formatDateDisplay(dateStr: string): string {
 // ======== Timeline 组件 ======== //
 const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
   const [hoverInfo, setHoverInfo] = useState<HoverInfo | null>(null);
+  const [tooltipOnLeft, setTooltipOnLeft] = useState(false); // 是否左下角
 
   const rangeStart = toDayNumber(start);
   const rangeEnd = toDayNumber(end);
@@ -148,6 +149,16 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
 
   const yearsArr = generateYearTicks(startYear, endYear);
 
+  // 鼠标进入时，设置提示信息和位置
+  const handleMouseEnter = (
+    info: HoverInfo,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const isRightHalf = e.clientX > window.innerWidth / 2;
+    setTooltipOnLeft(isRightHalf); // 如果鼠标在右半屏，把tooltip移左下角
+    setHoverInfo(info);
+  };
+
   return (
     <div className="timeline-container">
       {/* 年份刻度 */}
@@ -169,14 +180,12 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
           return null;
         })}
       </div>
-
       {/* 人物行 */}
       <div className="people-lines">
         {people.map((person) => (
           <div className="person-line" key={person.name}>
             <div className="person-name">{person.name}</div>
             <div className="events-bar">
-              {/* 时期块 */}
               {person.periods
                 .filter(
                   (p) =>
@@ -203,40 +212,45 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
                           rangeEnd
                         )}%`,
                       }}
-                      onMouseEnter={() =>
-                        setHoverInfo({
-                          name: person.name,
-                          status: p.status,
-                          start: p.start,
-                          end: p.end,
-                        })
+                      onMouseEnter={(e) =>
+                        handleMouseEnter(
+                          {
+                            name: person.name,
+                            status: p.status,
+                            start: p.start,
+                            end: p.end,
+                          },
+                          e
+                        )
                       }
                       onMouseLeave={() => setHoverInfo(null)}
                     />
                   );
                 })}
 
-              {/* 事件点 */}
               {person.events
                 .filter(
-                  (e) =>
-                    toDayNumber(e.date) >= rangeStart &&
-                    toDayNumber(e.date) <= rangeEnd
+                  (ev) =>
+                    toDayNumber(ev.date) >= rangeStart &&
+                    toDayNumber(ev.date) <= rangeEnd
                 )
-                .map((e, idx) => (
+                .map((ev, idx) => (
                   <div
                     key={`event-${idx}`}
                     className="event-point"
                     style={{
-                      left: `${getPosition(e.date, rangeStart, rangeEnd)}%`,
+                      left: `${getPosition(ev.date, rangeStart, rangeEnd)}%`,
                     }}
-                    onMouseEnter={() =>
-                      setHoverInfo({
-                        name: person.name,
-                        status: e.status,
-                        date: e.date,
-                        note: e.note,
-                      })
+                    onMouseEnter={(e) =>
+                      handleMouseEnter(
+                        {
+                          name: person.name,
+                          status: ev.status,
+                          date: ev.date,
+                          note: ev.note,
+                        },
+                        e
+                      )
                     }
                     onMouseLeave={() => setHoverInfo(null)}
                   />
@@ -248,7 +262,11 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
 
       {/* 提示框 */}
       {hoverInfo && (
-        <div className="tooltip">
+        <div
+          className={`tooltip ${
+            tooltipOnLeft ? "tooltip-left" : "tooltip-right"
+          }`}
+        >
           <strong>{hoverInfo.name}</strong>
           <br />
           {hoverInfo.date
@@ -266,5 +284,4 @@ const Timeline: React.FC<TimelineProps> = ({ people, start, end }) => {
     </div>
   );
 };
-
 export default Timeline;

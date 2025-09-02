@@ -15,7 +15,7 @@ import Timeline from "./components/Timeline";
 
 // 文件默认范围
 const defaultRanges: Record<string, { start: string; end: string }> = {
-  "z_han.json": { start: "-256-01-01", end: "-195-12-31" },
+  "han.json": { start: "-256-01-01", end: "-195-12-31" },
   "tang.json": { start: "566-01-01", end: "649-07-10" },
   "song.json": { start: "820-01-01", end: "998-01-01" },
 };

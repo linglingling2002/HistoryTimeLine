@@ -3,7 +3,19 @@
 目前已有隋末唐初、唐末五代至宋初时期的数据，并实现可视化展示。下一步计划完善秦末汉初部分，后续扩展内容仍在规划中。
 
 ## 启动方法
+1. 本地启动
 进入 src 目录，运行以下命令即可启动项目：
+
+2. Codespaces启动
+首先进入项目首页，点击Codespaces
+![alt text](step.png)
+
+进入Codespaces后等待初始化完毕，输入以下命令：
+npm install @mui/material @emotion/react @emotion/styled
+npm start
+此时下方会提示开启新画面，点击即可。
+
+
 
 `npm start`
 ## 使用方法
